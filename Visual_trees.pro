@@ -13,6 +13,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    AVL_tree.h \
+    common_parts_trees.h \
     mainwindow.h
 
 FORMS += \
