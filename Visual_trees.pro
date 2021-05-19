@@ -14,6 +14,7 @@ SOURCES += \
 
 HEADERS += \
     AVL_tree.h \
+    Splay_tree.h \
     common_parts_trees.h \
     mainwindow.h
 

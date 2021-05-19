@@ -109,7 +109,6 @@ void Insert(node_avl * now, int new_num) {
         } else {
             now->left = new node_avl;
             now->left->num = new_num;
-            now->left->h = 1;
         }
     } else {
         if (now->right != NULL) {
@@ -134,8 +133,15 @@ void DeleteIter(node_avl *& now, node_avl * deleting) {
             return;
         }
         delete(now);
-
+        now->h = 1 + MaxHighOfChilds(now);
+        return;
     }
+    if (now->num > deleting->num) {
+        DeleteIter(now->left, deleting);
+    } else {
+        DeleteIter(now->right, deleting);
+    }
+    now->h = 1 + MaxHighOfChilds(now);
 }
 
 void DeleteNode(node_avl *& root, node_avl * deleting) {
