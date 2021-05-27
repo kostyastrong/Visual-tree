@@ -10,35 +10,35 @@ struct node_avl {
     int num;
 };
 
-int h_node(node_avl * now);  // returning high of node
-void RecalcHigh(node_avl * now);
-void SmallTurn(node_avl *& now);  // now is the top of vertexes
-void BigTurn(node_avl *& now);
-int MaxHighOfChilds(node_avl * now);
+int h_nodeAVL(node_avl * now);  // returning high of node
+void RecalcHighAVL(node_avl * now);
+void SmallTurnAVL(node_avl *& now);  // now is the top of vertexes
+void BigTurnAVL(node_avl *& now);
+int MaxHighOfChildsAVL(node_avl * now);
 
-node_avl * MaxChildDeleting(node_avl * now, bool dif_way = false);
+node_avl * MaxChildDeletingAVL(node_avl * now, bool dif_way = false);
 // finding max child for replacement in left subtree
-node_avl * MinChildDeleting(node_avl * now, bool dif_way = false);
+node_avl * MinChildDeletingAVL(node_avl * now, bool dif_way = false);
 
-void Turn(node_avl *& now);  // now is a parent where we call
-void InsertIter(node_avl * now, int new_num);
-void InsertNode(node_avl *& root, int new_num);
+void TurnAVL(node_avl *& now);  // now is a parent where we call
+void InsertIterAVL(node_avl * now, int new_num);
+void InsertNodeAVL(node_avl *& root, int new_num);
 
-void DeleteIter(node_avl *& now, node_avl * deleting);
-void DeleteNode(node_avl *& root, node_avl * deleting);
+void DeleteIterAVL(node_avl *& now, node_avl * deleting);
+void DeleteNodeAVL(node_avl *& root, node_avl * deleting);
 
-int h_node(node_avl * now) {
+int h_nodeAVL(node_avl * now) {
     return now == nullptr ? 0 : now->h;
 }
 
-void RecalcHigh(node_avl* now) {
+void RecalcHighAVL(node_avl* now) {
     if (now == nullptr) return;
-    if (now->left != nullptr) now->left->h = 1 + MaxHighOfChilds(now->left);
-    if (now->right != nullptr) now->right->h = 1 + MaxHighOfChilds(now->right);
-    now->h = 1 + MaxHighOfChilds(now);
+    if (now->left != nullptr) now->left->h = 1 + MaxHighOfChildsAVL(now->left);
+    if (now->right != nullptr) now->right->h = 1 + MaxHighOfChildsAVL(now->right);
+    now->h = 1 + MaxHighOfChildsAVL(now);
 }
 
-void SmallTurn(node_avl *& now) {
+void SmallTurnAVL(node_avl *& now) {
     node_avl * left = now->left, * right = now->right;
 
     try{
@@ -47,7 +47,7 @@ void SmallTurn(node_avl *& now) {
             left->right = now;
             now->left = c;
             now = left;
-            now->left->h = 1 + MaxHighOfChilds(now->left);
+            now->left->h = 1 + MaxHighOfChildsAVL(now->left);
         } else if (right->right->h >= right->left->h) {
             node_avl * c = right->left;
             right->left = now;
@@ -64,12 +64,12 @@ void SmallTurn(node_avl *& now) {
         exit(0);
     }
 
-    RecalcHigh(now);
+    RecalcHighAVL(now);
 }
 
-void BigTurn(node_avl *& now) {
+void BigTurnAVL(node_avl *& now) {
     node_avl * left = now->left, * right = now->right;
-    if (h_node(left) < h_node(right)) {
+    if (h_nodeAVL(left) < h_nodeAVL(right)) {
         node_avl * goal = right->left, * goal_left = goal->left, * goal_right = goal->right;
         goal->left = now;
         goal->right = right;
@@ -85,85 +85,85 @@ void BigTurn(node_avl *& now) {
         now = goal;
     }
 
-    RecalcHigh(now);
+    RecalcHighAVL(now);
 }
 
-int MaxHighOfChilds(node_avl * now) {
-    return std::max(h_node(now->left), h_node(now->right));
+int MaxHighOfChildsAVL(node_avl * now) {
+    return std::max(h_nodeAVL(now->left), h_nodeAVL(now->right));
 }
 
-node_avl * MaxChildDeleting(node_avl * now, bool dif_way) {
+node_avl * MaxChildDeletingAVL(node_avl * now, bool dif_way) {
     if (!dif_way && now->right != nullptr) {
-        node_avl * x = MaxChildDeleting(now->right);
+        node_avl * x = MaxChildDeletingAVL(now->right);
         if (now->right == x) {
             now->right = now->right->left;
         }
-        now->h = 1 + MaxHighOfChilds(now);
+        now->h = 1 + MaxHighOfChildsAVL(now);
         return x;
     } else if (dif_way && now->left != nullptr) {
-        node_avl * x = MaxChildDeleting(now->left);
+        node_avl * x = MaxChildDeletingAVL(now->left);
         if (now->left == x) {
             now->left = now->left->left;
         }
-        now->h = 1 + MaxHighOfChilds(now);
+        now->h = 1 + MaxHighOfChildsAVL(now);
         return x;
     }
     return now;
 }
 
-node_avl * MinChildDeleting(node_avl * now, bool dif_way) {
+node_avl * MinChildDeletingAVL(node_avl * now, bool dif_way) {
     if (!dif_way && now->left != nullptr) {
-        node_avl * x = MinChildDeleting(now->left);
+        node_avl * x = MinChildDeletingAVL(now->left);
         if (now->left == x) {
             now->left = now->left->right;
         }
-        now->h = 1 + MaxHighOfChilds(now);
+        now->h = 1 + MaxHighOfChildsAVL(now);
         return x;
     } else if (dif_way && now->right != nullptr) {
-        node_avl * x = MinChildDeleting(now->right);
+        node_avl * x = MinChildDeletingAVL(now->right);
         if (now->right == x) {
             now->right = now->right->right;
         }
-        now->h = 1 + MaxHighOfChilds(now);
+        now->h = 1 + MaxHighOfChildsAVL(now);
         return x;
     }
     return now;
 }
 
-void InsertIter(node_avl * now, int new_num) {
+void InsertIterAVL(node_avl * now, int new_num) {
     if (now->num == new_num) return;
     if (new_num < now->num) {
         if (now->left != nullptr) {
-            InsertIter(now->left, new_num);
+            InsertIterAVL(now->left, new_num);
         } else {
             now->left = new node_avl;
             now->left->num = new_num;
         }
     } else {
         if (now->right != nullptr) {
-            InsertIter(now->right, new_num);
+            InsertIterAVL(now->right, new_num);
         } else {
             now->right = new node_avl;
             now->right->num = new_num;
         }
     }
-    now->h = 1 + MaxHighOfChilds(now);
+    now->h = 1 + MaxHighOfChildsAVL(now);
 }
 
-node_avl * FindByNum(node_avl * now, int finding) {
+node_avl * FindByNumAVL(node_avl * now, int finding) {
     if (now == nullptr) return nullptr;
     if (now->num == finding) return now;
-    if (now->num < finding) return FindByNum(now->right, finding);
-    else return FindByNum(now->left, finding);
+    if (now->num < finding) return FindByNumAVL(now->right, finding);
+    else return FindByNumAVL(now->left, finding);
 }
 
-void DeleteIter(node_avl *& now, node_avl * deleting) {
+void DeleteIterAVL(node_avl *& now, node_avl * deleting) {
     node_avl * new_node;
     if (now == deleting) {
         if (now->left != nullptr){
-            new_node = MinChildDeleting(now, true);
+            new_node = MinChildDeletingAVL(now, true);
         } else if (now->right != nullptr){
-            new_node = MaxChildDeleting(now, true);
+            new_node = MaxChildDeletingAVL(now, true);
         } else {
             delete(now);
             now = nullptr;
@@ -173,49 +173,49 @@ void DeleteIter(node_avl *& now, node_avl * deleting) {
         delete(now);
         now = new_node;
         now->left = left; now->right = right;              // при удалении корректируй сыновей
-        now->h = 1 + MaxHighOfChilds(now);
+        now->h = 1 + MaxHighOfChildsAVL(now);
         return;
     }
     if (now->num > deleting->num) {
-        DeleteIter(now->left, deleting);
+        DeleteIterAVL(now->left, deleting);
     } else {
-        DeleteIter(now->right, deleting);
+        DeleteIterAVL(now->right, deleting);
     }
-    now->h = 1 + MaxHighOfChilds(now);
+    now->h = 1 + MaxHighOfChildsAVL(now);
 }
 
-void DeleteNode(node_avl *& root, node_avl * deleting) {
-    DeleteIter(root, deleting);
-    Turn(root);
+void DeleteNodeAVL(node_avl *& root, node_avl * deleting) {
+    DeleteIterAVL(root, deleting);
+    TurnAVL(root);
 }
 
-void Turn(node_avl *& now) {  // h and h+2, not more
+void TurnAVL(node_avl *& now) {  // h and h+2, not more
     node_avl * left = now->left, * right = now->right;
-    int bet = h_node(left) - h_node(right);
+    int bet = h_nodeAVL(left) - h_nodeAVL(right);
 
     if (bet < 0) bet = -bet;
     if (bet <= 1) {
         return;
     }
 
-    if (h_node(left) > h_node(right)) {
-        if (h_node(left->left) >= h_node(left->right)) {
-            SmallTurn(now);
+    if (h_nodeAVL(left) > h_nodeAVL(right)) {
+        if (h_nodeAVL(left->left) >= h_nodeAVL(left->right)) {
+            SmallTurnAVL(now);
         } else {
-            BigTurn(now);
+            BigTurnAVL(now);
         }
     } else {
-        if (h_node(right->right) >= h_node(right->left)) {
-            SmallTurn(now);
+        if (h_nodeAVL(right->right) >= h_nodeAVL(right->left)) {
+            SmallTurnAVL(now);
         } else {
-            BigTurn(now);
+            BigTurnAVL(now);
         }
     }
 }
 
-void InsertNode(node_avl *& root, int new_num) {
-    InsertIter(root, new_num);
-    Turn(root);
+void InsertNodeAVL(node_avl *& root, int new_num) {
+    InsertIterAVL(root, new_num);
+    TurnAVL(root);
 }
 
 #endif // AVL_TREE_H
