@@ -9,14 +9,22 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    avl_tree.cpp \
+    crazycircle.cpp \
+    customview.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    splay_tree.cpp \
+    treap.cpp
 
 HEADERS += \
-    AVL_tree.h \
-    Splay_tree.h \
+    avl_tree.h \
     common_parts_trees.h \
-    mainwindow.h
+    crazycircle.h \
+    customview.h \
+    mainwindow.h \
+    splay_tree.h \
+    treap.h
 
 FORMS += \
     mainwindow.ui

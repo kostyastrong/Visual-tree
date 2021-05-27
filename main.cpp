@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "AVL_tree.h"
+#include "avl_tree.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

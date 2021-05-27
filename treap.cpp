@@ -1,15 +1,4 @@
-//
-// Created by maincpp on 26.05.2021.
-//
-
-#ifndef TREAP_H
-#define TREAP_H
-
-struct node_treap{
-    int x;
-    double y = static_cast<double>(rand()) / RAND_MAX;
-    node_treap * left = nullptr, * right = nullptr;
-};
+#include "treap.h"
 
 std::vector<node_treap*> SplitTreap(node_treap *A, int num) {
     if (!A) return {nullptr, nullptr, nullptr};
@@ -39,6 +28,10 @@ node_treap* MergeTreap(node_treap * A, node_treap * B) {  // A < B
 }
 
 node_treap * InsertTreap(node_treap * A, node_treap * num) {
+    if (!A->x) { // root
+        A = num;
+        return A;
+    }
     if (num->y > A->y) {
         std::vector<node_treap*> p = SplitTreap(A, num->x);
         num->left = p[0];
@@ -53,5 +46,3 @@ node_treap * InsertTreap(node_treap * A, node_treap * num) {
         return A;
     }
 }
-
-#endif //TREAP_H

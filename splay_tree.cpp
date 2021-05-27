@@ -1,13 +1,6 @@
-#ifndef SPLAY_TREE_H
-#define SPLAY_TREE_H
+#include "splay_tree.h"
 
 #include <iostream>
-
-struct node_splay{
-    node_splay * left = nullptr, * right = nullptr;
-    node_splay * parent = nullptr; // null for root
-    int num;
-};
 
 void ZigSplay(node_splay *& now, node_splay *& root) {  // zig only for root
     node_splay * right = now->right, * left = now->left;
@@ -112,6 +105,10 @@ void Splay(node_splay * now, node_splay *& root) {
 }
 
 node_splay * InsertIterSplay(node_splay * now, int num) {
+    if (!now->num) { // root
+        now->num = num;
+        return now;
+    }
     if (now->num > num) {
         if (now->left != nullptr) return InsertIterSplay(now->left, num);
         else {
@@ -175,4 +172,3 @@ void DeleteSplay(node_splay*& root, int num) {
     }
 }
 
-#endif // SPLAY_TREE_H
