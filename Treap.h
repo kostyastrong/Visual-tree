@@ -2,8 +2,8 @@
 // Created by maincpp on 26.05.2021.
 //
 
-#ifndef CLIONPROJECTS_TREAP_H
-#define CLIONPROJECTS_TREAP_H
+#ifndef TREAP_H
+#define TREAP_H
 
 struct node_treap{
     int x;
@@ -54,4 +54,4 @@ node_treap * InsertTreap(node_treap * A, node_treap * num) {
     }
 }
 
-#endif //CLIONPROJECTS_TREAP_H
+#endif //TREAP_H
