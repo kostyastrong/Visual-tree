@@ -128,7 +128,7 @@ void MainWindow::drawTree(QGraphicsScene * scene_now, node_draw * now, int x, in
     }
 }
 
-void MainWindow::clearScene(QGraphicsScene * scene_now) {
+void MainWindow::clearScene(QGraphicsScene *& scene_now) {
     clearDraw(root_draw);
     root_draw = new node_draw;
     scene_now->clear();

@@ -6,9 +6,11 @@ void ZigSplay(node_splay *& now, node_splay *& root) {  // zig only for root
     node_splay * right = now->right, * left = now->left;
     if (now == root->left) {
         root->left = right;
+        if (right != nullptr) right->parent = root;
         now->right = root;
     } else {
         root->right = left;
+        if (left != nullptr) left->parent = root;
         now->left = root;
     }
     root->parent = now;
@@ -93,7 +95,7 @@ void ZigZagSplay(node_splay * now, node_splay *& root) {
     }
 }
 
-void Splay(node_splay * now, node_splay *& root) {
+void Splay(node_splay *& now, node_splay *& root) {
     if (now == root) return;
     if (now->parent == root) ZigSplay(now, root);
     else {
@@ -103,6 +105,7 @@ void Splay(node_splay * now, node_splay *& root) {
             ZigZigSplay(now, root);
         } else ZigZagSplay(now, root);
     }
+    Splay(now, root);
 }
 
 node_splay * InsertIterSplay(node_splay *& now, int num) {

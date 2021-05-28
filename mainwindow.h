@@ -38,7 +38,7 @@ private slots:
 
     void drawTree(QGraphicsScene * scene_now, node_draw * now, int x = 0, int y = 0);
 
-    void clearScene(QGraphicsScene * scene_now);
+    void clearScene(QGraphicsScene *& scene_now);
 
     void drawLine(QGraphicsScene * scene_now, int x1, int y1, int x2, int y2);
 
