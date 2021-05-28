@@ -103,6 +103,7 @@ void InsertIterAVL(node_avl *& now, int new_num) {
     if (new_num < now->num) {
         if (now->left != nullptr) {
             InsertIterAVL(now->left, new_num);
+            TurnAVL(now);
         } else {
             now->left = new node_avl;
             now->left->num = new_num;
@@ -110,6 +111,7 @@ void InsertIterAVL(node_avl *& now, int new_num) {
     } else {
         if (now->right != nullptr) {
             InsertIterAVL(now->right, new_num);
+            TurnAVL(now);
         } else {
             now->right = new node_avl;
             now->right->num = new_num;
@@ -154,6 +156,7 @@ void DeleteIterAVL(node_avl *& now, node_avl * deleting) {
 
 void DeleteNodeAVL(node_avl *& root, int num) {
     node_avl * deleting = FindByNumAVL(root, num);
+    if (deleting == nullptr) return;
     DeleteIterAVL(root, deleting);
     TurnAVL(root);
 }

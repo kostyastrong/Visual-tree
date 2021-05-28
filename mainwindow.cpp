@@ -115,14 +115,16 @@ void MainWindow::drawTree(QGraphicsScene * scene_now, node_draw * now, int x, in
     int width = 50, hight = 30;
     drawVertex(scene_now, now->num, x, y, width, hight);
     if (now->left != nullptr) {
-        int right_corn_x = x - now->hight * (width + 10), right_corn_y =  y - now->hight * (hight + 10);
-        drawLine(scene_now, x, y - hight, right_corn_x, right_corn_y);
+        int right_corn_x = x - (now->hight + 1) * (width + 5),
+                right_corn_y =  y + (now->hight + 1) * (hight + 5);
+        drawLine(scene_now, x, y + hight, right_corn_x, right_corn_y);
         drawTree(scene_now, now->left, right_corn_x - width, right_corn_y);
     }
     if (now->right != nullptr) {
-        int left_corn_x = x + now->hight * (width + 10), left_corn_y = y - now->hight * (hight + 10);
-        drawLine(scene_now, x + width, y - hight, left_corn_x, left_corn_y);
-        drawTree(scene_now, now->right, left_corn_y, left_corn_y);
+        int left_corn_x = x + (now->hight + 1) * (width + 5),
+                left_corn_y = y + (now->hight + 1) * (hight + 5);
+        drawLine(scene_now, x + width, y + hight, left_corn_x, left_corn_y);
+        drawTree(scene_now, now->right, left_corn_x, left_corn_y);
     }
 }
 

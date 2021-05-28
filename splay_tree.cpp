@@ -158,6 +158,7 @@ node_splay * FindMinNodeSplay(node_splay *now) {
 
 void DeleteSplay(node_splay*& root, int num) {
     node_splay * place = FindNodeSplay(root, num);
+    if (place == nullptr) return;
     Splay(place, root);  // place is now root
     node_splay * root_left = place->left, * root_right = place->right;
     if (root_left != nullptr) root_left->parent = nullptr;
