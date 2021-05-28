@@ -152,7 +152,8 @@ void DeleteIterAVL(node_avl *& now, node_avl * deleting) {
     now->h = 1 + MaxHighOfChildsAVL(now);
 }
 
-void DeleteNodeAVL(node_avl *& root, node_avl * deleting) {
+void DeleteNodeAVL(node_avl *& root, int num) {
+    node_avl * deleting = FindByNumAVL(root, num);
     DeleteIterAVL(root, deleting);
     TurnAVL(root);
 }

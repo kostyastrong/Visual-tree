@@ -167,5 +167,13 @@ void MainWindow::on_DeleteTree_clicked()
 {
     int num = ui->numberDelete->text().toInt();
     std::cout << num << std::endl;
+
+    DeleteNodeAVL(root_avl, num);
+    DeleteSplay(root_splay, num);
+    DeleteTreap(root_treap, num);
+    std::cout << root_avl->num << ' ' << root_splay->num << ' ' << root_treap->x <<
+                 std::endl;
+
+    initializingTheTree();
 }
 

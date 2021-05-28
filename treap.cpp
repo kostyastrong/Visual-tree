@@ -46,3 +46,17 @@ node_treap * InsertTreap(node_treap *& A, node_treap * num) {
         return A;
     }
 }
+
+node_treap * DeleteTreap(node_treap *& A, int num) {
+    if (A == nullptr) return nullptr;
+    if (A->x == num) {
+        A = MergeTreap(A->left, A->right);
+        return A;
+    }
+    if (A->x > num) {
+        A->left = DeleteTreap(A->left, num);
+    } else {
+        A->right = DeleteTreap(A->right, num);
+    }
+    return A;
+}

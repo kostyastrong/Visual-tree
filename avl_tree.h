@@ -27,7 +27,7 @@ void InsertIterAVL(node_avl *& now, int new_num);
 void InsertNodeAVL(node_avl *& root, int new_num);
 
 void DeleteIterAVL(node_avl *& now, node_avl * deleting);
-void DeleteNodeAVL(node_avl *& root, node_avl * deleting);
+void DeleteNodeAVL(node_avl *& root, int num);
 
 
 #endif // AVL_TREE_H

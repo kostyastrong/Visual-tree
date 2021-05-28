@@ -158,21 +158,26 @@ node_splay * FindMinNodeSplay(node_splay *now) {
 
 void DeleteSplay(node_splay*& root, int num) {
     node_splay * place = FindNodeSplay(root, num);
-    Splay(place, root);
+    Splay(place, root);  // place is now root
     node_splay * root_left = place->left, * root_right = place->right;
-    if (root_left) root_left->parent = nullptr;
-    if (root_right) root_right->parent = nullptr;
+    if (root_left != nullptr) root_left->parent = nullptr;
+    if (root_right != nullptr) root_right->parent = nullptr;
     delete(root);
+    if (root_left == nullptr && root_right == nullptr) {
+        root = nullptr;
+        return;
+    }
+
 
     node_splay  * top_left = FindMaxNodeSplay(root_left),
                 * top_right = FindMinNodeSplay(root_right);
 
-    if (top_left) {
+    if (top_left != nullptr) {
         Splay(top_left, root_left);
         top_left->right = root_right;
-        root_right->parent = top_left;
+        if (root_right != nullptr) root_right->parent = top_left;
         root = top_left;
-    } else {
+    } else {  // left root son is null, so we can easy assign
         root = root_right;
     }
 }
