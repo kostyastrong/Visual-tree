@@ -12,6 +12,7 @@ SOURCES += \
     avl_tree.cpp \
     crazycircle.cpp \
     customview.cpp \
+    draw_tree.cpp \
     main.cpp \
     mainwindow.cpp \
     splay_tree.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     common_parts_trees.h \
     crazycircle.h \
     customview.h \
+    draw_tree.h \
     mainwindow.h \
     splay_tree.h \
     treap.h
