@@ -8,11 +8,6 @@
 #include "treap.h"
 #include "draw_tree.h"
 
-node_avl * root_avl = new node_avl;
-node_splay * root_splay = new node_splay;
-node_treap * root_treap = new node_treap;
-node_draw * root_draw = new node_draw;
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->showMeWhatYouGot->setScene(scene_avl);
 
-    int scene_index = 0;
+    scene_index = 0;
 }
 
 MainWindow::~MainWindow()
@@ -39,7 +34,7 @@ QBrush fillMe(Qt::yellow);
 void MainWindow::on_AVLButton_clicked()
 {
     ui->showMeWhatYouGot->setScene(scene_avl);
-    int scene_index = 0;
+    scene_index = 0;
     initializingTheTree();
 }
 
@@ -63,7 +58,6 @@ void MainWindow::initializingTheTree() {
     node_avl * avl = nullptr;
     node_splay * splay = nullptr;
     node_treap * treap = nullptr;
-    int scene_index;
 
     switch(scene_index) {
         case 0:
@@ -141,7 +135,7 @@ void MainWindow::clearScene(QGraphicsScene * scene_now) {
 void MainWindow::on_TreapButton_clicked()
 {
     ui->showMeWhatYouGot->setScene(scene_treap);
-    int scene_index = 2;
+    scene_index = 2;
     initializingTheTree();
     /*
      * drawVertex(scene_treap, 500000, 0, 0);
@@ -164,7 +158,7 @@ void MainWindow::on_TreapButton_clicked()
 void MainWindow::on_SplayButton_clicked()
 {
     ui->showMeWhatYouGot->setScene(scene_splay);
-    int scene_index = 1;
+    scene_index = 1;
     initializingTheTree();
 }
 

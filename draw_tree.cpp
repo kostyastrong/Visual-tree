@@ -1,7 +1,7 @@
 #include "draw_tree.h"
 
 void clearDraw(node_draw* now) {
-    if (!now) return;
+    if (now == nullptr) return;
     clearDraw(now->left);
     clearDraw(now->right);
     delete(now);

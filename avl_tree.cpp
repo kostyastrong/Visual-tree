@@ -14,31 +14,21 @@ void RecalcHighAVL(node_avl* now) {
 void SmallTurnAVL(node_avl *& now) {
     node_avl * left = now->left, * right = now->right;
 
-    try{
-        if (left->left->h >= left->right->h) {
-            node_avl * c = left->right;
-            left->right = now;
-            now->left = c;
-            now = left;
-            now->left->h = 1 + MaxHighOfChildsAVL(now->left);
-        } else if (right->right->h >= right->left->h) {
-            node_avl * c = right->left;
-            right->left = now;
-            now->right = c;
-            now = right;
-        } else {
-            throw 42;  // oop for fun
-        }
-    } catch (int i) {
-        std::cout << "NOT A SMALL TURN\n";
-        exit(0);
-    } catch (...) {
-        std::cout << "WTF HAPPENED IN SMALL TURN\n";
-        exit(0);
+    if (h_nodeAVL(left) < h_nodeAVL(right)) {  // delta is more than 2
+        node_avl * c = right->left;
+        right->left = now;
+        now->right = c;
+        now = right;
+    } else {
+        node_avl * c = left->right;
+        left->right = now;
+        now->left = c;
+        now = left;
+        now->left->h = 1 + MaxHighOfChildsAVL(now->left);
     }
-
     RecalcHighAVL(now);
 }
+
 
 void BigTurnAVL(node_avl *& now) {
     node_avl * left = now->left, * right = now->right;
@@ -103,8 +93,9 @@ node_avl * MinChildDeletingAVL(node_avl * now, bool dif_way) {
     return now;
 }
 
-void InsertIterAVL(node_avl * now, int new_num) {
-    if (!now->num) { // root
+void InsertIterAVL(node_avl *& now, int new_num) {
+    if (now == nullptr) { // root
+        now = new node_avl;
         now->num = new_num;
         return;
     }

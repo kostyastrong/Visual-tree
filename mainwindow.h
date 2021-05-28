@@ -11,12 +11,6 @@
 #include "treap.h"
 #include "draw_tree.h"
 
-extern node_avl * root_avl;
-extern node_splay * root_splay;
-extern node_treap * root_treap;
-extern node_draw * root_draw;
-extern int scene_index;
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -56,6 +50,12 @@ private:
     QGraphicsScene * scene_avl;
     QGraphicsScene * scene_splay;
     QGraphicsScene * scene_treap;
+
+    node_avl * root_avl = nullptr;
+    node_splay * root_splay = nullptr;
+    node_treap * root_treap = nullptr;
+    node_draw * root_draw = nullptr;
+    int scene_index = 0;
 };
 
 #endif // MAINWINDOW_H

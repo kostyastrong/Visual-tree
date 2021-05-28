@@ -23,7 +23,7 @@ node_avl * MinChildDeletingAVL(node_avl * now, bool dif_way = false);
 node_avl * FindByNumAVL(node_avl * now, int finding);
 
 void TurnAVL(node_avl *& now);  // now is a parent where we call
-void InsertIterAVL(node_avl * now, int new_num);
+void InsertIterAVL(node_avl *& now, int new_num);
 void InsertNodeAVL(node_avl *& root, int new_num);
 
 void DeleteIterAVL(node_avl *& now, node_avl * deleting);

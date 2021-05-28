@@ -1,7 +1,7 @@
 #include "treap.h"
 
 std::vector<node_treap*> SplitTreap(node_treap *A, int num) {
-    if (!A) return {nullptr, nullptr, nullptr};
+    if (A == nullptr) return {nullptr, nullptr, nullptr};
     if (A->x == num) return {A->left, A, A->right};
     if (A->x < num) {
         std::vector<node_treap*> p = SplitTreap(A->right, num);
@@ -15,8 +15,8 @@ std::vector<node_treap*> SplitTreap(node_treap *A, int num) {
 }
 
 node_treap* MergeTreap(node_treap * A, node_treap * B) {  // A < B
-    if (!A) return B;
-    if (!B) return A;
+    if (A == nullptr) return B;
+    if (B == nullptr) return A;
 
     if (A->y > B->y) {
         A->right = MergeTreap(A->right, B);
@@ -27,8 +27,8 @@ node_treap* MergeTreap(node_treap * A, node_treap * B) {  // A < B
     }
 }
 
-node_treap * InsertTreap(node_treap * A, node_treap * num) {
-    if (!A->x) { // root
+node_treap * InsertTreap(node_treap *& A, node_treap * num) {
+    if (A == nullptr) { // root
         A = num;
         return A;
     }
@@ -40,7 +40,7 @@ node_treap * InsertTreap(node_treap * A, node_treap * num) {
     } else {
         if (num->x > A->x) {
             A->right = InsertTreap(A->right, num);
-        } else {
+        } else if (num->x < A->x){
             A->left = InsertTreap(A->left, num);
         }
         return A;

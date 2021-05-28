@@ -105,8 +105,9 @@ void Splay(node_splay * now, node_splay *& root) {
     }
 }
 
-node_splay * InsertIterSplay(node_splay * now, int num) {
-    if (!now->num) { // root
+node_splay * InsertIterSplay(node_splay *& now, int num) {
+    if (now == nullptr) { // root
+        now = new node_splay;
         now->num = num;
         return now;
     }
@@ -118,7 +119,7 @@ node_splay * InsertIterSplay(node_splay * now, int num) {
             now->left->num = num;
             return now->left;
         }
-    } else {
+    } else if (now->num < num){
         if (now->right != nullptr) return InsertIterSplay(now->right, num);
         else {
             now->right = new node_splay;
@@ -126,8 +127,11 @@ node_splay * InsertIterSplay(node_splay * now, int num) {
             now->right->num = num;
             return now->right;
         }
+    } else {
+        return now;
     }
 }
+
 void InsertSplay(node_splay *&root, int num) {
     node_splay * place = InsertIterSplay(root, num);
     Splay(place, root);

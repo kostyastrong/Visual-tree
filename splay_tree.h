@@ -13,7 +13,7 @@ void ZigSplay(node_splay *& now, node_splay *& root);
 void ZigZigSplay(node_splay *& now, node_splay *& root);
 void ZigZagSplay(node_splay * now, node_splay *& root);
 void Splay(node_splay * now, node_splay *& root);
-node_splay * InsertIterSplay(node_splay * now, int num);
+node_splay * InsertIterSplay(node_splay *& now, int num);
 void InsertSplay(node_splay *&root, int num);
 node_splay* FindNodeSplay(node_splay * now, int num);
 node_splay* FindMaxNodeSplay(node_splay *now);
