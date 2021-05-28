@@ -94,6 +94,7 @@ void ZigZagSplay(node_splay * now, node_splay *& root) {
 }
 
 void Splay(node_splay * now, node_splay *& root) {
+    if (now == root) return;
     if (now->parent == root) ZigSplay(now, root);
     else {
         node_splay * par = now->parent, * par_of_par = par->parent;

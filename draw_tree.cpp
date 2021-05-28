@@ -12,9 +12,10 @@ int constructTreeDraw(node_draw * now,
                     node_splay * splay_now,
                     node_avl * avl_now,
                     node_treap * node_treap) {
-    if (!splay_now && !avl_now && !node_treap) return 0;
+    if (splay_now == nullptr && avl_now == nullptr && node_treap == nullptr)
+        return 0;
 
-    if (!splay_now) {
+    if (splay_now != nullptr) {
         now->num = splay_now->num;
         if (splay_now->left) {
             now->left = new node_draw;
@@ -24,7 +25,7 @@ int constructTreeDraw(node_draw * now,
         }
         now->hight = std::max(constructTreeDraw(now->left, splay_now->left),
                          constructTreeDraw(now->right, splay_now->right));
-    } else if (!avl_now) {
+    } else if (avl_now != nullptr) {
         now->num = avl_now->num;
         if (avl_now->left) {
             now->left = new node_draw;
@@ -34,7 +35,7 @@ int constructTreeDraw(node_draw * now,
         }
         now->hight = std::max(constructTreeDraw(now->left, nullptr, avl_now->left),
                          constructTreeDraw(now->right, nullptr, avl_now->right));
-    } else if (!node_treap) {
+    } else if (node_treap != nullptr) {
         now->num = node_treap->x;
         if (node_treap->left) {
             now->left = new node_draw;

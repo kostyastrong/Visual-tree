@@ -15,6 +15,7 @@ extern node_avl * root_avl;
 extern node_splay * root_splay;
 extern node_treap * root_treap;
 extern node_draw * root_draw;
+extern int scene_index;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,6 +47,8 @@ private slots:
     void clearScene(QGraphicsScene * scene_now);
 
     void drawLine(QGraphicsScene * scene_now, int x1, int y1, int x2, int y2);
+
+    void initializingTheTree();
 
 
 private:
