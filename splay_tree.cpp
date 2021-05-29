@@ -41,9 +41,11 @@ void ZigZigSplay(node_splay *& now, node_splay *& root) {
         par->parent = now;
         par->right = par_of_par;
         par->left = right;
+        if (right != nullptr) right->parent = par;
 
         par_of_par->parent = par;
         par_of_par->left = par_right;
+        if (par_right != nullptr) par_right = par_of_par;
     } else {
         node_splay * left = now->left, * par_left = par->left;
 
@@ -51,10 +53,12 @@ void ZigZigSplay(node_splay *& now, node_splay *& root) {
 
         par->parent = now;
         par->right = left;
+        if (left != nullptr) left->parent = par;
         par->left = par_of_par;
 
         par_of_par->parent = par;
         par_of_par->right = par_left;
+        if (par_left != nullptr) par_left->parent = par_of_par;
     }
 }
 
@@ -79,18 +83,22 @@ void ZigZagSplay(node_splay * now, node_splay *& root) {
         now->right = par;
 
         par->left = right;
+        if (right != nullptr) right->parent = par;
         par->parent = now;
 
         par_of_par->right = left;
+        if (left != nullptr) left->parent = par_of_par;
         par_of_par->parent = now;
     } else {
         now->left = par;
         now->right = par_of_par;
 
         par->right = left;
+        if (left != nullptr) left->parent = par;
         par->parent = now;
 
         par_of_par->left = right;
+        if (right != nullptr) right->parent = par_of_par;
         par_of_par->parent = now;
     }
 }
@@ -138,6 +146,7 @@ node_splay * InsertIterSplay(node_splay *& now, int num) {
 void InsertSplay(node_splay *&root, int num) {
     node_splay * place = InsertIterSplay(root, num);
     Splay(place, root);
+    int t = 5;
 }
 
 node_splay* FindNodeSplay(node_splay * now, int num) {

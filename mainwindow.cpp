@@ -20,6 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->showMeWhatYouGot->setScene(scene_avl);
 
     scene_index = 0;
+
+    pow_of_two[0] = 1;
+    for (int i = 1; i < 21; ++i)
+        pow_of_two[i] = pow_of_two[i - 1] * 2;
 }
 
 MainWindow::~MainWindow()
@@ -114,14 +118,16 @@ void MainWindow::drawLine(QGraphicsScene * scene_now, int x1, int y1, int x2, in
 void MainWindow::drawTree(QGraphicsScene * scene_now, node_draw * now, int x, int y) {
     int width = 50, hight = 30;
     drawVertex(scene_now, now->num, x, y, width, hight);
+    int h = now->hight;
+    if (h > 20) h = 20;
     if (now->left != nullptr) {
-        int right_corn_x = x - (now->hight + 1) * (width + 5),
+        int right_corn_x = x - (pow_of_two[h]) * (width + 5),
                 right_corn_y =  y + (now->hight + 1) * (hight + 5);
         drawLine(scene_now, x, y + hight, right_corn_x, right_corn_y);
         drawTree(scene_now, now->left, right_corn_x - width, right_corn_y);
     }
     if (now->right != nullptr) {
-        int left_corn_x = x + (now->hight + 1) * (width + 5),
+        int left_corn_x = x + (pow_of_two[h]) * (width + 5),
                 left_corn_y = y + (now->hight + 1) * (hight + 5);
         drawLine(scene_now, x + width, y + hight, left_corn_x, left_corn_y);
         drawTree(scene_now, now->right, left_corn_x, left_corn_y);

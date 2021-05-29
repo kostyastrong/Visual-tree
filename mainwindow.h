@@ -56,6 +56,7 @@ private:
     node_treap * root_treap = nullptr;
     node_draw * root_draw = nullptr;
     int scene_index = 0;
+    int pow_of_two[21];
 };
 
 #endif // MAINWINDOW_H

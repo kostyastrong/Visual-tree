@@ -10,7 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     avl_tree.cpp \
-    crazycircle.cpp \
     customview.cpp \
     draw_tree.cpp \
     main.cpp \
@@ -21,7 +20,6 @@ SOURCES += \
 HEADERS += \
     avl_tree.h \
     common_parts_trees.h \
-    crazycircle.h \
     customview.h \
     draw_tree.h \
     mainwindow.h \
